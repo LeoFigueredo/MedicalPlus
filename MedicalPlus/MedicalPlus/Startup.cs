@@ -37,7 +37,19 @@ namespace MedicalPlus
             services.AddDbContext<MedicalPlusContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDefaultIdentity<IdentityUser>(
+                    options =>
+                    {
+                        options.Lockout.MaxFailedAccessAttempts = 5;
+                        options.Password.RequiredLength = 6;
+                        options.Password.RequiredUniqueChars = 3;
+                        options.Password.RequireLowercase = false;
+                        options.Password.RequireNonAlphanumeric = false;
+                        options.Password.RequireUppercase = false;
+
+                        options.User.RequireUniqueEmail = true;
+                    }
+                                                      )
                 .AddEntityFrameworkStores<MedicalPlusContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
