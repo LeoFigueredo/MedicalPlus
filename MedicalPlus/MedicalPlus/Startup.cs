@@ -37,7 +37,7 @@ namespace MedicalPlus
             services.AddDbContext<MedicalPlusContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(
+            services.AddDefaultIdentity<MedicalPlus.Data.ApplicationUser>(
                     options =>
                     {
                         options.Lockout.MaxFailedAccessAttempts = 5;
@@ -51,6 +51,7 @@ namespace MedicalPlus
                     }
                                                       )
                 .AddEntityFrameworkStores<MedicalPlusContext>();
+            services.AddScoped<SignInManager<ApplicationUser>, SignInManager<ApplicationUser>>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -72,6 +73,7 @@ namespace MedicalPlus
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseStaticFiles();
 
             app.UseAuthentication();
 

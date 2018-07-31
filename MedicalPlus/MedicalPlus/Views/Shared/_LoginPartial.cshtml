@@ -1,7 +1,7 @@
 @using Microsoft.AspNetCore.Identity
 
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<MedicalPlus.Data.ApplicationUser> SignInManager
+@inject UserManager<MedicalPlus.Data.ApplicationUser> UserManager
 
 @if (SignInManager.IsSignedIn(User))
 {

@@ -8,18 +8,19 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MedicalPlus.Data;
 
 namespace MedicalPlus.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
 
         public IndexModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -39,6 +40,22 @@ namespace MedicalPlus.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Full name")]
+            public string FullName { get; set; }
+
+            [Required]
+            [Display(Name = "Address")]
+            [DataType(DataType.Text)]
+            public String Address { get; set; }
+
+            [Required]
+            [Display(Name = "Gender")]
+            [DataType(DataType.Text)]
+            public String Gender { get; set; }
+
+
             [Required]
             [EmailAddress]
             public string Email { get; set; }
@@ -64,6 +81,9 @@ namespace MedicalPlus.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
+                FullName = user.FullName,
+                Address = user.Address,
+                Gender = user.Gender,
                 Email = email,
                 PhoneNumber = phoneNumber
             };
@@ -86,6 +106,22 @@ namespace MedicalPlus.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
+            if (Input.FullName  != user.FullName)
+            {
+                user.FullName = Input.FullName;
+            }
+
+            if (Input.Address != user.Address)
+            {
+                user.Address = Input.Address;
+            }
+
+            if (Input.Gender != user.Gender)
+            {
+                user.Gender = Input.Gender;
+            }
+
+
             var email = await _userManager.GetEmailAsync(user);
             if (Input.Email != email)
             {
@@ -107,6 +143,8 @@ namespace MedicalPlus.Areas.Identity.Pages.Account.Manage
                     throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
                 }
             }
+
+            await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
