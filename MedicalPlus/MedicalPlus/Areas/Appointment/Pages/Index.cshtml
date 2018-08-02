@@ -1,0 +1,61 @@
+﻿@page
+@model MedicalPlus.Areas.Appointment.IndexModel
+@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Appointments</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="well-block">
+                <div class="well-title">
+                    <h2>First select the speciality which you want to be care:</h2>
+                </div>
+                <form>
+                    <!-- Select Basic -->
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label" for="appointmentfor">Appointment For</label>
+                            <select id="appointmentfor" name="appointmentfor" class="form-control">
+                                <option value="Service#1">Service#1</option>
+                                <option value="Service#2">Service#2</option>
+                                <option value="Service#3">Service#3</option>
+                                <option value="Service#4">Service#4</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Form start -->
+                    <div class="row">
+                        <!-- Text input-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="date">Preferred Date</label>
+                                <input type="text" placeholder="Preferred Date" id="Demo">
+                            </div>
+                        </div>
+                        <!-- Select Basic -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="time">Preferred Time</label>
+                                <select id="time" name="time" class="form-control">
+                                    <option value="8:00 to 9:00">8:00 to 9:00</option>
+                                    <option value="9:00 to 10:00">9:00 to 10:00</option>
+                                    <option value="10:00 to 1:00">10:00 to 1:00</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Button -->
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <button id="singlebutton" name="singlebutton" class="btn btn-default">Make An Appointment</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- form end -->
+            </div>
+        </div>
+    </div>
+</div>

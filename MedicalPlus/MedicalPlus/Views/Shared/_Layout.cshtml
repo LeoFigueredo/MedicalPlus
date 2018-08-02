@@ -8,12 +8,16 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="css/datepicker.css" />
+        <link rel="stylesheet" href="css/bootstrap.css" />
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+      
     </environment>
 </head>
 <body>
@@ -32,7 +36,14 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    @using Microsoft.AspNetCore.Identity
+
+                    @inject SignInManager<MedicalPlus.Data.ApplicationUser> SignInManager
+                    @inject UserManager<MedicalPlus.Data.ApplicationUser> UserManager
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Go to Appointments</a></li>
+                    }
                 </ul>
                 <partial name="_LoginPartial" />
             </div>
@@ -68,6 +79,21 @@
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
+        <script src="js/jquery-1.9.1.min.js"></script>
+        <script src="js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js" ></script>
+        <script type="text/javascript">
+            // When the document is ready
+            $(document).ready(function () {
+
+                $('#Demo').datepicker({
+                    format: "dd/mm/yyyy"
+                });
+
+            });
+        </script>
     </environment>
 
     @RenderSection("Scripts", required: false)

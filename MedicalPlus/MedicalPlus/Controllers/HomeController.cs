@@ -26,7 +26,7 @@ namespace MedicalPlus.Controllers
         {
             ViewData["Message"] = "Your contact page.";
 
-            return View();
+            return View("Areas/Appointment/Pages/Index.cshtml");
         }
 
         public IActionResult Privacy()
