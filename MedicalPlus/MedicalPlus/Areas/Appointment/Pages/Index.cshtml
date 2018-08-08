@@ -25,15 +25,25 @@
                             </select>
                         </div>
                     </div>
+                    <br><br />
                     <!-- Form start -->
-                    <div class="row">
-                        <!-- Text input-->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label" for="date">Preferred Date</label>
-                                <input type="text" placeholder="Preferred Date" id="Demo">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class='col-sm-6'>
+                                <div class="form-group">
+                                    <label class="control-label" for="date">Select Date:</label>
+                                    <input id="datepicker" width="270" />
+                                    <script>
+                                        $('#datepicker').datepicker({
+                                            uiLibrary: 'bootstrap'
+                                        });
+                                    </script>
+                                </div>
                             </div>
+                      
                         </div>
+                    </div>
+                        
                         <!-- Select Basic -->
                         <div class="col-md-6">
                             <div class="form-group">
@@ -51,7 +61,7 @@
                                 <button id="singlebutton" name="singlebutton" class="btn btn-default">Make An Appointment</button>
                             </div>
                         </div>
-                    </div>
+                   
                 </form>
                 <!-- form end -->
             </div>
